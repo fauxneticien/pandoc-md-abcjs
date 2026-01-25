@@ -46,3 +46,11 @@ Me (Nay)
 - I've been playing Irish folk music for a few years now
 - I would like to dive a bit more deeply into tunes to think about the melodies and chord progressions
 - I learn best when I can write prose around examples to build up to some conclusion (side effect of academia)
+
+## Acknowledgements
+
+The entire concept would not be possible without several core libraries:
+
+- [pandoc](https://pandoc.org/) by [John MacFarlane](https://johnmacfarlane.net/)
+- [abcjs](https://github.com/paulrosen/abcjs) by [Paul Rosen](https://paulrosen.net/)
+- [ABC Transcription Tools](https://michaeleskin.com/abctools/abctools.html) by [Michael Eskin](https://michaeleskin.com/)
