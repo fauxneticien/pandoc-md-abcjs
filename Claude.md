@@ -12,47 +12,65 @@ The primary use case is writing prose about music (e.g., Irish folk music, fiddl
 - **ABC Notation** - Text-based music notation format
 - **abcjs v6.6.0** - JavaScript library for rendering ABC notation (loaded from CDN)
 - **Lua** - Pandoc filter scripting
-- **Vanilla JavaScript** - Client-side interactivity (no build system)
+- **ES Modules** - Client-side plugin architecture (no build system)
 
 ## Project Structure
 
 ```
-├── index.md              # Example input markdown with ABC notation
-├── index.html            # Generated HTML output
-├── template.html         # Pandoc HTML template
-├── abcjs-helpers.js      # JavaScript for rendering and playback
-├── abcjs-passthrough.lua # Pandoc filter for ABC code blocks
-└── README.md             # Project documentation
+├── pandoc/                    # Pandoc templates and filters
+│   ├── template.html          # HTML5 template
+│   ├── passthrough.lua        # Generic passthrough filter for plugins
+│   └── generate_index.py      # Index page generator
+│
+├── docs/                      # Served content (GitHub Pages)
+│   ├── plugins/
+│   │   ├── main.js            # Plugin entry point (ES module)
+│   │   └── abcjs/             # ABC music notation plugin
+│   │       ├── abcjs.js
+│   │       ├── abcjs.css
+│   │       └── manifest.json
+│   ├── posts/                 # Blog posts
+│   │   └── YYYY-MM-DD/
+│   │       ├── index.md       # Source
+│   │       └── index.html     # Generated
+│   └── index.html             # Post index
+│
+├── taskfile.yaml              # Build tasks
+└── README.md
 ```
 
 ## Key Files
 
 | File | Purpose |
 |------|---------|
-| `abcjs-helpers.js` | Core JavaScript that renders ABC notation to SVG, handles audio playback, cursor tracking, and interactive features |
-| `abcjs-passthrough.lua` | Lua filter that preserves `abcjs` code blocks as raw HTML divs |
-| `template.html` | HTML5 template including abcjs library, styles, and script loading |
+| `pandoc/passthrough.lua` | Lua filter that passes through code blocks for client-rendered plugins |
+| `pandoc/template.html` | HTML5 template with CDN deps and plugin script loading |
+| `docs/plugins/main.js` | ES module entry point that imports and initializes plugins |
+| `docs/plugins/abcjs/abcjs.js` | ABC notation rendering, audio playback, cursor tracking |
 
 ## Build Command
 
 ```bash
-pandoc index.md \
-  -o index.html \
+pandoc docs/posts/2026-01-24/index.md \
+  -o docs/posts/2026-01-24/index.html \
   --standalone \
   --from markdown \
   --to html5 \
-  --template=template.html \
-  --lua-filter=abcjs-passthrough.lua
+  --template=pandoc/template.html \
+  --lua-filter=pandoc/passthrough.lua
 ```
 
 ## Dependencies
 
 - **Pandoc** must be installed on the system
 - **abcjs** is loaded from CDN (no npm/package.json)
+- **Task** (go-task) for build automation (optional)
 
 ## Development Notes
 
-- No build system, transpiler, or package manager - this is intentionally minimal
-- No automated tests
-- The JavaScript in `abcjs-helpers.js` runs on page load and processes all `abcjs` code blocks
-- ABC notation blocks in Markdown should use the `abcjs` language identifier in fenced code blocks
+- No build system, transpiler, or package manager - intentionally minimal
+- Plugins use ES modules with `export default`
+- Add new plugins by:
+  1. Creating `docs/plugins/<name>/<name>.js`
+  2. Adding to `plugins` array in `pandoc/passthrough.lua`
+  3. Importing in `docs/plugins/main.js`

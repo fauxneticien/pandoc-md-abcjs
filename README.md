@@ -28,8 +28,8 @@ pandoc index.md \
   --standalone \
   --from markdown \
   --to html5 \
-  --template=template.html \
-  --lua-filter=abcjs-passthrough.lua # Passthrough filter to prevent processing abcjs codeblocks
+  --template=pandoc/template.html \
+  --lua-filter=pandoc/passthrough.lua
 ```
 
 Resulting in:

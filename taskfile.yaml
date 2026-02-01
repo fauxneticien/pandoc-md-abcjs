@@ -6,11 +6,11 @@ tasks:
     vars:
       INPUT: '{{.INPUT | default "docs/posts/2026-01-24/index.md"}}'
     cmds:
-      - pandoc {{.INPUT}} -o {{.INPUT | replace ".md" ".html"}} --standalone --from markdown --to html5 --template=render/template.html --lua-filter=render/abcjs-passthrough.lua
+      - pandoc {{.INPUT}} -o {{.INPUT | replace ".md" ".html"}} --standalone --from markdown --to html5 --template=pandoc/template.html --lua-filter=pandoc/passthrough.lua
     sources:
       - '{{.INPUT}}'
-      - render/template.html
-      - render/abcjs-passthrough.lua
+      - pandoc/template.html
+      - pandoc/passthrough.lua
 
   build-all:
     desc: Build all markdown files in docs/posts/ to HTML
@@ -21,12 +21,12 @@ tasks:
   generate-index:
     desc: Generate docs/index.html from posts folders
     cmds:
-      - python3 render/generate_index.py
+      - python3 pandoc/generate_index.py
 
   serve:
     desc: Launch livereload server for development
     cmds:
-      - python -c "from livereload import Server; server = Server(); server.watch('docs/posts/**/*.md', 'task build-all'); server.watch('docs/**/*.html'); server.watch('docs/plugins/**/*.js'); server.watch('docs/plugins/**/*.css'); server.watch('render/*.lua', 'task build-all'); server.serve(root='docs', port=8000, host='0.0.0.0')"
+      - python -c "from livereload import Server; server = Server(); server.watch('docs/posts/**/*.md', 'task build-all'); server.watch('docs/**/*.html'); server.watch('docs/plugins/**/*.js'); server.watch('docs/plugins/**/*.css'); server.watch('pandoc/*.lua', 'task build-all'); server.serve(root='docs', port=8000, host='0.0.0.0')"
 
   watch:
     desc: Watch and rebuild .md files as they are edited using entr
