@@ -1,0 +1,34 @@
+version: '3'
+
+tasks:
+  build:
+    desc: Build a markdown file to HTML using pandoc
+    vars:
+      INPUT: '{{.INPUT | default "index.md"}}'
+    cmds:
+      - pandoc {{.INPUT}} -o {{.INPUT | replace ".md" ".html"}} --standalone --from markdown --to html5 --template=template.html --lua-filter=abcjs-passthrough.lua
+    sources:
+      - '{{.INPUT}}'
+      - template.html
+      - abcjs-passthrough.lua
+
+  build-all:
+    desc: Build all markdown files to HTML
+    cmds:
+      - for f in *.md; do [ "$f" != "README.md" ] && [ "$f" != "Claude.md" ] && task build INPUT="$f" || true; done
+    silent: true
+
+  serve:
+    desc: Launch livereload server for development
+    cmds:
+      - python -c "from livereload import Server; server = Server(); server.watch('*.md', 'task build-all'); server.watch('*.html'); server.watch('*.js'); server.watch('*.lua', 'task build-all'); server.serve(root='.', port=8000, host='0.0.0.0')"
+
+  watch:
+    desc: Watch and rebuild .md files as they are edited using entr
+    cmds:
+      - find . -maxdepth 1 -name '*.md' ! -name 'README.md' ! -name 'Claude.md' | entr -r task build-all
+
+  dev:
+    desc: Run both livereload server and file watcher
+    deps:
+      - serve
