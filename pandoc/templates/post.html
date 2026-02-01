@@ -31,6 +31,11 @@ div#main {
 <body>
 
 <div id="main">
+$if(toc)$
+<nav id="toc">
+$toc$
+</nav>
+$endif$
 $body$
 </div>
 
@@ -38,7 +43,7 @@ $body$
 <script type="module" src="../../plugins/main.js"></script>
 
 <script>
-// Dynamically render page title as h1 from document title
+// Dynamically render page title as h1 from document title, before TOC
 (function() {
     const title = document.title;
     if (title) {
