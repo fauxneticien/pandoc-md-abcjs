@@ -6,10 +6,10 @@ tasks:
     vars:
       INPUT: '{{.INPUT | default "docs/posts/2026-01-24/index.md"}}'
     cmds:
-      - pandoc {{.INPUT}} -o {{.INPUT | replace ".md" ".html"}} --standalone --from markdown --to html5 --template=pandoc/template.html --lua-filter=pandoc/passthrough.lua
+      - pandoc {{.INPUT}} -o {{.INPUT | replace ".md" ".html"}} --standalone --from markdown --to html5 --template=pandoc/templates/post.html --lua-filter=pandoc/passthrough.lua
     sources:
       - '{{.INPUT}}'
-      - pandoc/template.html
+      - pandoc/templates/post.html
       - pandoc/passthrough.lua
 
   build-all:

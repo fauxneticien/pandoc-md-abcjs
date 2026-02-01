@@ -2,25 +2,29 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Test title</title>
 
+<!-- Plugin CDN Dependencies -->
+<!-- abcjs plugin -->
 <script src="https://cdn.jsdelivr.net/npm/abcjs@6.6.0/dist/abcjs-basic-min.js"></script>
 <link href="https://cdn.jsdelivr.net/npm/abcjs@6.6.0/abcjs-audio.min.css" rel="stylesheet">
 
-<style>
-.abcjs-highlight { fill: #0a9ecc; }
-.abcjs-cursor { stroke: red; }
-div[id^="abcjs-wrapper-"] { margin-bottom: 2em; }
-div[id^="paper-"] { max-width: 1200px; }
+<!-- Plugin Styles -->
+<link href="../../plugins/abcjs/abcjs.css" rel="stylesheet">
 
+<style>
+/* Base layout styles */
 body {
     text-align: center;
 }
 
 div#main {
     margin: auto;
-    width:1200px;
+    max-width: 1200px;
+    padding: 0 1rem;
     text-align: left;
+    box-sizing: border-box;
 }
 </style>
 </head>
@@ -35,7 +39,8 @@ K: Gmaj
 |:"G"B2GB AGEG|DGGF G2AB|</code></pre>
 </div>
 
-<script src="../../js/abcjs-helpers.js"></script>
+<!-- Plugin Scripts -->
+<script type="module" src="../../plugins/main.js"></script>
 
 </body>
 </html>
