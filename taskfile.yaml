@@ -16,17 +16,21 @@ tasks:
     desc: Build all markdown files in docs/posts/ to HTML
     cmds:
       - for f in docs/posts/*/index.md; do task build INPUT="$f"; done
+      - task generate-index
     silent: true
 
   generate-index:
     desc: Generate docs/index.html from posts folders
     cmds:
       - python3 pandoc/generate_index.py
+    sources:
+      - docs/posts/*/index.md
+      - pandoc/generate_index.py
 
   serve:
     desc: Launch livereload server for development
     cmds:
-      - python -c "from livereload import Server; server = Server(); server.watch('docs/posts/**/*.md', 'task build-all'); server.watch('docs/**/*.html'); server.watch('docs/plugins/**/*.js'); server.watch('docs/plugins/**/*.css'); server.watch('pandoc/*.lua', 'task build-all'); server.serve(root='docs', port=8000, host='0.0.0.0')"
+      - python -c "from livereload import Server; server = Server(); server.watch('docs/posts/**/*.md', 'task build-all'); server.watch('docs/**/*.html'); server.watch('docs/plugins/**/*.js'); server.watch('docs/plugins/**/*.css'); server.watch('pandoc/*.lua', 'task build-all'); server.watch('pandoc/generate_index.py', 'task generate-index'); server.serve(root='docs', port=8000, host='0.0.0.0')"
 
   watch:
     desc: Watch and rebuild .md files as they are edited using entr
