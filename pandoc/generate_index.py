@@ -7,6 +7,8 @@ import os
 import re
 from pathlib import Path
 
+import yaml
+
 DOCS_DIR = Path(__file__).parent.parent / "docs"
 POSTS_DIR = DOCS_DIR / "posts"
 OUTPUT_FILE = DOCS_DIR / "index.html"
@@ -64,10 +66,13 @@ def extract_title(md_path):
     if not match:
         return None
     front_matter = match.group(1)
-    # Extract title from front matter
-    title_match = re.search(r'^title:\s*(.+)$', front_matter, re.MULTILINE)
-    if title_match:
-        return title_match.group(1).strip()
+    # Parse YAML front matter
+    try:
+        metadata = yaml.safe_load(front_matter)
+        if metadata and isinstance(metadata, dict):
+            return metadata.get('title')
+    except yaml.YAMLError:
+        pass
     return None
 
 
