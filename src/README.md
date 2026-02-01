@@ -7,8 +7,8 @@ This directory contains the core processing scripts and templates used to conver
 ### `abcjs-passthrough.lua`
 A Pandoc Lua filter that intercepts code blocks with the `abcjs` class during markdown-to-HTML conversion. It wraps the ABC notation content as `<pre><code class="abcjs">` HTML, preventing Pandoc from escaping or modifying the notation.
 
-### `abcjs-helpers.js`
-Client-side JavaScript that runs when the generated HTML page loads. It:
+### `../docs/js/abcjs-helpers.js`
+Client-side JavaScript (located in `docs/js/` for GitHub Pages serving) that runs when the generated HTML page loads. It:
 - Finds all `<pre><code class="abcjs">` blocks created by Pandoc
 - Renders them as interactive SVG sheet music using the abcjs library
 - Adds playback controls (play, pause, loop, tempo)
