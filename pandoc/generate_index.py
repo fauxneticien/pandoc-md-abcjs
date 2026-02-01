@@ -4,7 +4,10 @@ Generate docs/index.html by indexing all post folders in docs/posts/.
 """
 
 import os
+import re
 from pathlib import Path
+
+import yaml
 
 DOCS_DIR = Path(__file__).parent.parent / "docs"
 POSTS_DIR = DOCS_DIR / "posts"
@@ -53,28 +56,52 @@ a:hover {{
 """
 
 
+def extract_title(md_path):
+    """Extract title from YAML front matter of a markdown file."""
+    if not md_path.exists():
+        return None
+    content = md_path.read_text()
+    # Match YAML front matter between --- delimiters
+    match = re.match(r'^---\s*\n(.*?)\n---', content, re.DOTALL)
+    if not match:
+        return None
+    front_matter = match.group(1)
+    # Parse YAML front matter
+    try:
+        metadata = yaml.safe_load(front_matter)
+        if metadata and isinstance(metadata, dict):
+            return metadata.get('title')
+    except yaml.YAMLError:
+        pass
+    return None
+
+
 def get_post_folders():
-    """Return sorted list of post folder names in docs/posts/."""
+    """Return sorted list of (folder_name, title) tuples for posts in docs/posts/."""
     if not POSTS_DIR.exists():
         return []
-    folders = [
-        d.name for d in POSTS_DIR.iterdir()
-        if d.is_dir() and (d / "index.html").exists()
-    ]
-    return sorted(folders, reverse=True)
+    posts = []
+    for d in POSTS_DIR.iterdir():
+        if d.is_dir() and (d / "index.html").exists():
+            title = extract_title(d / "index.md")
+            posts.append((d.name, title))
+    return sorted(posts, key=lambda x: x[0], reverse=True)
 
 
 def generate_index():
     """Generate the docs/index.html file."""
-    folders = get_post_folders()
+    posts = get_post_folders()
 
-    if not folders:
+    if not posts:
         post_links = "<li>No posts yet.</li>"
     else:
-        post_links = "\n".join(
-            f'<li><a href="posts/{folder}/">{folder}</a></li>'
-            for folder in folders
-        )
+        links = []
+        for folder, title in posts:
+            if title:
+                links.append(f'<li><a href="posts/{folder}/">{folder} - {title}</a></li>')
+            else:
+                links.append(f'<li><a href="posts/{folder}/">{folder}</a></li>')
+        post_links = "\n".join(links)
 
     html = HTML_TEMPLATE.format(post_links=post_links)
 

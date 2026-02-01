@@ -12,7 +12,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 RUN curl -sSL https://taskfile.dev/install.sh | sh -s -- -d -b /usr/local/bin
 
 # Install Python dependencies
-RUN pip install --no-cache-dir livereload
+RUN pip install --no-cache-dir livereload pyyaml
 
 WORKDIR /app
 
