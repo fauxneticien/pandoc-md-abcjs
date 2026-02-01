@@ -38,7 +38,7 @@ plugins/<plugin-name>/
 3. Create `<plugin>.js` that registers with `window.MarkdownPlugins`
 4. Create `<plugin>.css` for styles (optional)
 5. Add the plugin name to `plugins.yaml`
-6. Copy assets to `docs/js/` and `docs/css/`
+6. Run `task copy-plugins` to copy assets to `docs/plugins/<your-plugin>/`
 
 ## JavaScript Plugin Pattern
 

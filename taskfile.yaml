@@ -2,13 +2,13 @@ version: '3'
 
 tasks:
   copy-plugins:
-    desc: Copy active plugin assets to docs/
+    desc: Copy active plugin assets to docs/plugins/
     cmds:
-      - mkdir -p docs/js docs/css
       - |
         for plugin in $(grep -E '^\s+-\s+\w' plugins.yaml | sed 's/.*- //'); do
-          [ -f "plugins/$plugin/$plugin.js" ] && cp "plugins/$plugin/$plugin.js" docs/js/
-          [ -f "plugins/$plugin/$plugin.css" ] && cp "plugins/$plugin/$plugin.css" docs/css/
+          mkdir -p "docs/plugins/$plugin"
+          [ -f "plugins/$plugin/$plugin.js" ] && cp "plugins/$plugin/$plugin.js" "docs/plugins/$plugin/"
+          [ -f "plugins/$plugin/$plugin.css" ] && cp "plugins/$plugin/$plugin.css" "docs/plugins/$plugin/"
         done
 
   build:
