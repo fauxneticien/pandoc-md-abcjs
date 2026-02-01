@@ -1,8 +1,0 @@
-# Active plugins configuration
-# Uncomment plugins to enable them
-
-plugins:
-  - abcjs
-  # - mermaid     # Diagrams (future)
-  # - katex       # Math rendering (future)
-  # - tikz        # LaTeX diagrams (future)
