@@ -21,15 +21,7 @@ tasks:
   serve:
     desc: Launch livereload server for development
     cmds:
-      - python -c "
-        from livereload import Server;
-        server = Server();
-        server.watch('*.md', 'task build-all');
-        server.watch('*.html');
-        server.watch('*.js');
-        server.watch('*.lua', 'task build-all');
-        server.serve(root='.', port=8000, host='0.0.0.0')
-        "
+      - python -c "from livereload import Server; server = Server(); server.watch('*.md', 'task build-all'); server.watch('*.html'); server.watch('*.js'); server.watch('*.lua', 'task build-all'); server.serve(root='.', port=8000, host='0.0.0.0')"
 
   watch:
     desc: Watch and rebuild .md files as they are edited using entr
