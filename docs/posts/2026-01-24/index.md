@@ -2,7 +2,7 @@
 title: Test title
 ---
 
-# Test title
+## Test subtitle
 
 This is some prose
 
