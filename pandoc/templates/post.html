@@ -37,5 +37,18 @@ $body$
 <!-- Plugin Scripts -->
 <script type="module" src="../../plugins/main.js"></script>
 
+<script>
+// Dynamically render page title as h1 from document title
+(function() {
+    const title = document.title;
+    if (title) {
+        const h1 = document.createElement('h1');
+        h1.textContent = title;
+        const main = document.getElementById('main');
+        main.insertBefore(h1, main.firstChild);
+    }
+})();
+</script>
+
 </body>
 </html>
