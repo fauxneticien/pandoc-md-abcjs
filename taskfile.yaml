@@ -1,6 +1,16 @@
 version: '3'
 
 tasks:
+  copy-plugins:
+    desc: Copy active plugin assets to docs/
+    cmds:
+      - mkdir -p docs/js docs/css
+      - |
+        for plugin in $(grep -E '^\s+-\s+\w' plugins.yaml | sed 's/.*- //'); do
+          [ -f "plugins/$plugin/$plugin.js" ] && cp "plugins/$plugin/$plugin.js" docs/js/
+          [ -f "plugins/$plugin/$plugin.css" ] && cp "plugins/$plugin/$plugin.css" docs/css/
+        done
+
   build:
     desc: Build a markdown file to HTML using pandoc
     vars:
@@ -14,6 +24,8 @@ tasks:
 
   build-all:
     desc: Build all markdown files in docs/posts/ to HTML
+    deps:
+      - copy-plugins
     cmds:
       - for f in docs/posts/*/index.md; do task build INPUT="$f"; done
     silent: true
@@ -26,7 +38,7 @@ tasks:
   serve:
     desc: Launch livereload server for development
     cmds:
-      - python -c "from livereload import Server; server = Server(); server.watch('docs/posts/**/*.md', 'task build-all'); server.watch('docs/**/*.html'); server.watch('src/*.js'); server.watch('src/*.lua', 'task build-all'); server.serve(root='docs', port=8000, host='0.0.0.0')"
+      - python -c "from livereload import Server; server = Server(); server.watch('docs/posts/**/*.md', 'task build-all'); server.watch('docs/**/*.html'); server.watch('plugins/**/*.js', 'task copy-plugins'); server.watch('plugins/**/*.css', 'task copy-plugins'); server.watch('src/*.lua', 'task build-all'); server.serve(root='docs', port=8000, host='0.0.0.0')"
 
   watch:
     desc: Watch and rebuild .md files as they are edited using entr

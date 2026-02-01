@@ -4,22 +4,23 @@
 <meta charset="UTF-8">
 <title>$title$</title>
 
+<!-- Plugin CDN Dependencies -->
+<!-- abcjs plugin -->
 <script src="https://cdn.jsdelivr.net/npm/abcjs@6.6.0/dist/abcjs-basic-min.js"></script>
 <link href="https://cdn.jsdelivr.net/npm/abcjs@6.6.0/abcjs-audio.min.css" rel="stylesheet">
 
-<style>
-.abcjs-highlight { fill: #0a9ecc; }
-.abcjs-cursor { stroke: red; }
-div[id^="abcjs-wrapper-"] { margin-bottom: 2em; }
-div[id^="paper-"] { max-width: 1200px; }
+<!-- Plugin Styles -->
+<link href="../../css/abcjs.css" rel="stylesheet">
 
+<style>
+/* Base layout styles */
 body {
     text-align: center;
 }
 
 div#main {
     margin: auto;
-    width:1200px;
+    width: 1200px;
     text-align: left;
 }
 </style>
@@ -30,7 +31,8 @@ div#main {
 $body$
 </div>
 
-<script src="../../js/abcjs-helpers.js"></script>
+<!-- Plugin Scripts -->
+<script src="../../js/abcjs.js"></script>
 
 </body>
 </html>
