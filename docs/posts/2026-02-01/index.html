@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Backing: Out on the Ocean (Part B)</title>
+
+<!-- Plugin CDN Dependencies -->
+<!-- abcjs plugin -->
+<script src="https://cdn.jsdelivr.net/npm/abcjs@6.6.0/dist/abcjs-basic-min.js"></script>
+<link href="https://cdn.jsdelivr.net/npm/abcjs@6.6.0/abcjs-audio.min.css" rel="stylesheet">
+
+<!-- Plugin Styles -->
+<link href="../../plugins/abcjs/abcjs.css" rel="stylesheet">
+
+<style>
+/* Base layout styles */
+body {
+    text-align: center;
+}
+
+div#main {
+    margin: auto;
+    max-width: 1200px;
+    padding: 0 1rem;
+    text-align: left;
+    box-sizing: border-box;
+}
+
+/* Table of contents */
+nav#toc {
+    margin: 1.5rem 0;
+    padding: 1rem 1.5rem;
+    background: #f8f9fa;
+    border-radius: 4px;
+}
+
+nav#toc h2 {
+    margin: 0 0 0.75rem 0;
+    font-size: 1.1rem;
+}
+
+nav#toc ul {
+    margin: 0;
+    padding-left: 1.5rem;
+}
+
+nav#toc li {
+    margin: 0.25rem 0;
+}
+
+nav#toc a {
+    color: #0066cc;
+    text-decoration: none;
+}
+
+nav#toc a:hover {
+    text-decoration: underline;
+}
+
+@media (min-width: 600px) {
+    nav#toc {
+        max-width: 500px;
+    }
+}
+</style>
+</head>
+<body>
+
+<div id="main">
+<nav id="toc">
+<h2>Contents</h2>
+<ul>
+<li><a href="#vashon-backing" id="toc-vashon-backing">Vashon
+backing</a></li>
+<li><a href="#perhaps-obvious" id="toc-perhaps-obvious">Perhaps
+obvious?</a></li>
+<li><a href="#other-options" id="toc-other-options">Other options</a>
+<ul>
+<li><a href="#i-g-major-g---b---d" id="toc-i-g-major-g---b---d">I: G
+Major: (G - B - D)</a></li>
+<li><a href="#iv-c-major-c---e---g" id="toc-iv-c-major-c---e---g">IV: C
+Major: (C - E - G)</a></li>
+<li><a href="#ii-a-minor-a---c---e" id="toc-ii-a-minor-a---c---e">ii: A
+minor: (A - C - E)</a></li>
+</ul></li>
+</ul>
+</nav>
+<h2 id="vashon-backing">Vashon backing</h2>
+<p>In the Vashon Celtic Tunes chart for <a
+href="https://www.vashonceltictunes.net/irish/htmchords/outontheocean.htm">Out
+on the Ocean</a>, the Part B starts out with the <code>Em</code>
+chord:</p>
+<pre><code>Out On The Ocean
+Jig in G
+
+Part A
+G G | G D | G G | C D
+G G | G D | G G | D G
+
+Part B
+Em Em | Em Em | D D | D D
+G  G  | C  G  | G G | D G
+Em Em | Em Em | D D | D D
+G  G  | C  G  | G G | D G</code></pre>
+<h2 id="perhaps-obvious">Perhaps obvious?</h2>
+<p>Perhaps the choice of <code>vi: E minor: (E - G - B)</code> is a no
+brainer, given the melody lands right on the <code>E</code> note at both
+the <code>1</code> and <code>4</code> down beats (jig in 6/8).</p>
+<pre><code class="abcjs">X: 1
+R: jig
+M: 6/8
+L: 1/8
+Q: 1/4=100
+K: Gmaj
+%%barnumbers 1
+|"Em""_1"e2e "_4"edB| "Em""_1"ege "_4"edB|</code></pre>
+<h2 id="other-options">Other options</h2>
+<p>But just for analysis, let’s try out some of the options.</p>
+<h3 id="i-g-major-g---b---d">I: G Major: (G - B - D)</h3>
+<p>Not horrible, though the major colours it more bright.</p>
+<pre><code class="abcjs">X: 1
+R: jig
+M: 6/8
+L: 1/8
+Q: 1/4=100
+K: Gmaj
+%%barnumbers 1
+|"G""_1"e2e "_4"edB| "G""_1"ege "_4"edB|</code></pre>
+<h3 id="iv-c-major-c---e---g">IV: C Major: (C - E - G)</h3>
+<p>I imagine the same for <code>C</code>.</p>
+<pre><code class="abcjs">X: 1
+R: jig
+M: 6/8
+L: 1/8
+Q: 1/4=100
+K: Gmaj
+%%barnumbers 1
+|"C""_1"e2e "_4"edB| "C""_1"ege "_4"edB|</code></pre>
+<h3 id="ii-a-minor-a---c---e">ii: A minor: (A - C - E)</h3>
+<p>If not major, then what about another minor?</p>
+<pre><code class="abcjs">X: 1
+R: jig
+M: 6/8
+L: 1/8
+Q: 1/4=100
+K: Gmaj
+%%barnumbers 1
+|"Am""_1"e2e "_4"edB| "Am""_1"ege "_4"edB|</code></pre>
+<p>Doesn’t quite work either. So I think the <code>Em</code> is the very
+natural choice, having had a closer look at the melody.</p>
+</div>
+
+<!-- Plugin Scripts -->
+<script type="module" src="../../plugins/main.js"></script>
+
+<script>
+// Dynamically render page title as h1 from document title, before TOC
+(function() {
+    const title = document.title;
+    if (title) {
+        const h1 = document.createElement('h1');
+        h1.textContent = title;
+        const main = document.getElementById('main');
+        main.insertBefore(h1, main.firstChild);
+    }
+})();
+</script>
+
+</body>
+</html>
