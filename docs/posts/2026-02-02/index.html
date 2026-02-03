@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Rookery</title>
+
+<!-- Plugin CDN Dependencies -->
+<!-- abcjs plugin -->
+<script src="https://cdn.jsdelivr.net/npm/abcjs@6.6.0/dist/abcjs-basic-min.js"></script>
+<link href="https://cdn.jsdelivr.net/npm/abcjs@6.6.0/abcjs-audio.min.css" rel="stylesheet">
+
+<!-- Plugin Styles -->
+<link href="../../plugins/abcjs/abcjs.css" rel="stylesheet">
+
+<style>
+/* Base layout styles */
+body {
+    text-align: center;
+}
+
+div#main {
+    margin: auto;
+    max-width: 1200px;
+    padding: 0 1rem;
+    text-align: left;
+    box-sizing: border-box;
+}
+
+/* Table of contents */
+nav#toc {
+    margin: 1.5rem 0;
+    padding: 1rem 1.5rem;
+    background: #f8f9fa;
+    border-radius: 4px;
+}
+
+nav#toc h2 {
+    margin: 0 0 0.75rem 0;
+    font-size: 1.1rem;
+}
+
+nav#toc ul {
+    margin: 0;
+    padding-left: 1.5rem;
+}
+
+nav#toc li {
+    margin: 0.25rem 0;
+}
+
+nav#toc a {
+    color: #0066cc;
+    text-decoration: none;
+}
+
+nav#toc a:hover {
+    text-decoration: underline;
+}
+
+@media (min-width: 600px) {
+    nav#toc {
+        max-width: 500px;
+    }
+}
+</style>
+</head>
+<body>
+
+<div id="main">
+<nav id="toc">
+<h2>Contents</h2>
+<ul>
+<li><a href="#part-a" id="toc-part-a">Part A</a>
+<ul>
+<li><a href="#a.1" id="toc-a.1">A.1</a></li>
+<li><a href="#a.2" id="toc-a.2">A.2</a></li>
+<li><a href="#a.3" id="toc-a.3">A.3</a></li>
+<li><a href="#a.4" id="toc-a.4">A.4</a></li>
+</ul></li>
+<li><a href="#part-b" id="toc-part-b">Part B</a>
+<ul>
+<li><a href="#b.1" id="toc-b.1">B.1</a></li>
+<li><a href="#b.2-same-as-a.2" id="toc-b.2-same-as-a.2">B.2 (same as
+A.2)</a></li>
+<li><a href="#b.3-same-as-a.3" id="toc-b.3-same-as-a.3">B.3 (same as
+A.3)</a></li>
+<li><a href="#b.4-almost-same-as-a.4"
+id="toc-b.4-almost-same-as-a.4">B.4 (almost same as A.4)</a></li>
+</ul></li>
+</ul>
+</nav>
+<p>Adding The Rookery reel, chunked into 2-measure phrases to practice
+this week.</p>
+<h2 id="part-a">Part A</h2>
+<h3 id="a.1">A.1</h3>
+<pre><code class="abcjs">X:1
+K:Gmajor
+M:4/4
+Q: 1/4=80
+|BGAG EGDG|EGDG EGDE|z8|z8|</code></pre>
+<h3 id="a.2">A.2</h3>
+<pre><code class="abcjs">X:1
+K:Gmajor
+M:4/4
+Q: 1/4=80
+|G2 Bd e2 dg|e2 dg edBA|z8|z8|</code></pre>
+<h3 id="a.3">A.3</h3>
+<pre><code class="abcjs">X:1
+K:Gmajor
+M:4/4
+Q: 1/4=80
+|G2 GA B2 Bd|e2 ed efga|z8|z8|</code></pre>
+<h3 id="a.4">A.4</h3>
+<pre><code class="abcjs">X:1
+K:Gmajor
+M:4/4
+Q: 1/4=80
+|bgag egge|dBAc BG G2|z8|z8|</code></pre>
+<h2 id="part-b">Part B</h2>
+<h3 id="b.1">B.1</h3>
+<pre><code class="abcjs">X:1
+K:Gmajor
+M:4/4
+Q: 1/4=80
+|b2 gb a2 ga|b2 gb aged|z8|z8|</code></pre>
+<h3 id="b.2-same-as-a.2">B.2 (same as A.2)</h3>
+<pre><code class="abcjs">X:1
+K:Gmajor
+M:4/4
+Q: 1/4=80
+|G2 Bd e2 dg|e2 dg edBA|z8|z8|</code></pre>
+<h3 id="b.3-same-as-a.3">B.3 (same as A.3)</h3>
+<pre><code class="abcjs">X:1
+K:Gmajor
+M:4/4
+Q: 1/4=80
+|G2 GA B2 Bd|e2 ed efga|z8|z8|</code></pre>
+<h3 id="b.4-almost-same-as-a.4">B.4 (almost same as A.4)</h3>
+<pre><code>A.4, last measure:  dBAc
+B.4, last measure:  d2Ac</code></pre>
+<pre><code class="abcjs">X:1
+K:Gmajor
+M:4/4
+Q: 1/4=80
+|bgag egge|d2Ac BG G2|z8|z8|</code></pre>
+</div>
+
+<!-- Plugin Scripts -->
+<script type="module" src="../../plugins/main.js"></script>
+
+<script>
+// Dynamically render page title as h1 from document title, before TOC
+(function() {
+    const title = document.title;
+    if (title) {
+        const h1 = document.createElement('h1');
+        h1.textContent = title;
+        const main = document.getElementById('main');
+        main.insertBefore(h1, main.firstChild);
+    }
+})();
+</script>
+
+</body>
+</html>
